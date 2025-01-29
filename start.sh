@@ -4,17 +4,17 @@ clear
 # Configuration
 URL="https://0x05485c0b0c759d1ec2b5307207b11077927e2fcf.gaia.domains/v1/chat/completions"
 HEADERS=(-H "accept: application/json" -H "Content-Type: application/json")
-KEYWORDS_FILE="https://raw.githubusercontent.com/suuf24/question/refs/heads/main/keywords.txt"  # File containing the list of questions/keywords
+KEYWORDS_URL="https://raw.githubusercontent.com/suuf24/question/refs/heads/main/keywords.txt"  # URL of keywords
 INTERVAL=30  # Interval in seconds
 
-# Function to get a random line from the keywords file
+# Function to get a random keyword from the URL
 get_random_keyword() {
-  if [[ -f "$KEYWORDS_FILE" ]]; then
-    shuf -n 1 "$KEYWORDS_FILE"  # Use `shuf` to pick a random line
-  else
-    echo "Error: File $KEYWORDS_FILE not found!" >&2
+  local keyword=$(curl -s "$KEYWORDS_URL" | shuf -n 1)
+  if [[ -z "$keyword" ]]; then
+    echo "Error: Could not retrieve keyword from URL!" >&2
     exit 1
   fi
+  echo "$keyword"
 }
 
 # Function to send the request
