@@ -4,7 +4,7 @@ clear
 # Configuration
 URL="https://0x05485c0b0c759d1ec2b5307207b11077927e2fcf.gaia.domains/v1/chat/completions"
 HEADERS=(-H "accept: application/json" -H "Content-Type: application/json")
-KEYWORDS_FILE="keywords.txt"  # File containing the list of questions/keywords
+KEYWORDS_FILE="https://raw.githubusercontent.com/suuf24/question/refs/heads/main/keywords.txt"  # File containing the list of questions/keywords
 INTERVAL=30  # Interval in seconds
 
 # Function to get a random line from the keywords file
